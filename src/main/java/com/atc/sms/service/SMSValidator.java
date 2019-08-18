@@ -4,7 +4,6 @@ import com.atc.sms.SMSContants;
 import com.atc.sms.dto.SMSRequest;
 import com.atc.sms.dto.SMSResponse;
 import com.atc.sms.model.PhoneNumber;
-import com.atc.sms.model.Transaction;
 import org.springframework.stereotype.Service;
 
 @Service

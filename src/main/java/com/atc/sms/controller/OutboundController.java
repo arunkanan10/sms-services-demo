@@ -5,9 +5,7 @@ import com.atc.sms.SMSContants;
 import com.atc.sms.dto.SMSRequest;
 import com.atc.sms.dto.SMSResponse;
 import com.atc.sms.model.PhoneNumber;
-import com.atc.sms.model.Transaction;
 import com.atc.sms.repository.PhoneNumberRepository;
-import com.atc.sms.repository.TransactionRepository;
 import com.atc.sms.service.AuthenticationService;
 import com.atc.sms.service.SMSValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +22,6 @@ import redis.clients.jedis.Jedis;
 public class OutboundController {
 
     @Autowired
-    TransactionRepository transactionRepository;
-
-    @Autowired
     AuthenticationService authenticationService;
 
     @Autowired
@@ -34,8 +29,6 @@ public class OutboundController {
 
     @Autowired
     JedisUtility jedisUtility;
-
-    private String[] stopStrArr = {"STOP", "STOP\n", "STOP\r", "STOP\r\n"};
 
     @PostMapping("/outbound/sms")
     public ResponseEntity outboundSMSService(@RequestHeader HttpHeaders headers, @RequestBody SMSRequest smsRequest) {

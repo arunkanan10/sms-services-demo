@@ -5,9 +5,7 @@ import com.atc.sms.SMSContants;
 import com.atc.sms.dto.SMSRequest;
 import com.atc.sms.dto.SMSResponse;
 import com.atc.sms.model.PhoneNumber;
-import com.atc.sms.model.Transaction;
 import com.atc.sms.repository.PhoneNumberRepository;
-import com.atc.sms.repository.TransactionRepository;
 import com.atc.sms.service.AuthenticationService;
 import com.atc.sms.service.SMSValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +29,15 @@ public class InboundController {
     PhoneNumberRepository phoneNumberRepository;
 
     @Autowired
-    TransactionRepository transactionRepository;
-
-    @Autowired
     AuthenticationService authenticationService;
+
+    public InboundController(PhoneNumberRepository phNumRepository,
+                             AuthenticationService authService, JedisUtility jedisUtility) {
+
+        this.phoneNumberRepository = phNumRepository;
+        this.authenticationService = authService;
+        this.jedisUtility = jedisUtility;
+    }
 
     private String[] stopStrArr = {"STOP", "STOP\n", "STOP\r", "STOP\r\n"};
 
