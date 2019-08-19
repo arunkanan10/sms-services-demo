@@ -1,20 +1,20 @@
 A spring boot application [micro service API server] that serves as fulfillment for SMS Services
 
-Features:
+**Features:**
 
-Inbound Service - When text is STOP or STOP\n or STOP\r or STOP\r\n.
+__Inbound Service__ - When text is STOP or STOP\n or STOP\r or STOP\r\n.
                   The ‘from’ and ‘to’ pair will be stored in cache as a unique entry and it will expire after 4 hours.
 
-Outbound Service - It will allow only 50 API requests using the same ‘from’ number in
+__Outbound Service__ - It will allow only 50 API requests using the same ‘from’ number in
                    24 hours from the first use of the ‘from’ number and reset counter after 24 hours.
 
 The micro services will be protected by token header and which is used for authentication. Below are example headers.
     - [{"key":"username","value":"test1","description":""}]
     - [{"key":"authId","value":"xxxxxxxxxx","description":""}]
 
-API /inbound/sms/ :
+**API /inbound/sms/ :**
 
-Sample Request:
+__Sample Request:__
 {
 	"from": "3253280329",
 	"to": "4924195509198",
@@ -22,9 +22,9 @@ Sample Request:
 }
 
 
-API /outbound/sms/ :
+**API /outbound/sms/ :**
 
-Sample Request:
+__Sample Request:__
 
 {
 	"from": "3253280329",
