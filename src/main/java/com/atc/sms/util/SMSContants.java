@@ -1,4 +1,4 @@
-package com.atc.sms;
+package com.atc.sms.util;
 
 public class SMSContants {
 
@@ -7,7 +7,8 @@ public class SMSContants {
     public static final String PARAM_INVALID = "is invalid";
     public static final String TO_PARAM_NOT_FOUND = "to parameter not found";
     public static final String UNEXPECTED_ERROR = "unknown failure";
-    public static final String ALL_PARAM_VALID = "inbound sms ok";
+    public static final String INBOUND_SMS_OK = "inbound sms ok";
+    public static final String OUTBOUND_SMS_OK = "outbound sms ok";
     public static final String FROM = "from";
     public static final String TO = "to";
     public static final String TEXT = "text";

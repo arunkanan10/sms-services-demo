@@ -1,6 +1,6 @@
-package com.atc.sms.service;
+package com.atc.sms.util;
 
-import com.atc.sms.SMSContants;
+import com.atc.sms.util.SMSContants;
 import com.atc.sms.dto.SMSRequest;
 import com.atc.sms.dto.SMSResponse;
 import com.atc.sms.model.PhoneNumber;

@@ -1,14 +1,15 @@
 package com.atc.sms.controller;
 
-import com.atc.sms.JedisUtility;
-import com.atc.sms.SMSContants;
+import com.atc.sms.util.JedisUtility;
+import com.atc.sms.util.SMSContants;
 import com.atc.sms.dto.SMSRequest;
 import com.atc.sms.dto.SMSResponse;
 import com.atc.sms.model.PhoneNumber;
 import com.atc.sms.repository.PhoneNumberRepository;
 import com.atc.sms.service.AuthenticationService;
-import com.atc.sms.service.SMSValidator;
+import com.atc.sms.util.SMSValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,9 @@ public class OutboundController {
 
     @Autowired
     JedisUtility jedisUtility;
+
+    @Value("${com.atc.cache.from.expiry.duration}")
+    private int expiryDuration;
 
     @PostMapping("/outbound/sms")
     public ResponseEntity outboundSMSService(@RequestHeader HttpHeaders headers, @RequestBody SMSRequest smsRequest) {
@@ -65,7 +69,7 @@ public class OutboundController {
             val = jedis.get(key);
             if (val == null) {
                 jedis.set(key, "1");
-                jedis.expire(key, 24 * 3600); //Expire in 24 hours
+                jedis.expire(key, expiryDuration);
             } else {
                 int n = Integer.parseInt(val);
                 if (n <= 50) {
@@ -77,7 +81,7 @@ public class OutboundController {
                 }
             }
 
-            response.setMessage(SMSContants.ALL_PARAM_VALID);
+            response.setMessage(SMSContants.OUTBOUND_SMS_OK);
             return new ResponseEntity(response, HttpStatus.OK);
         } catch (Exception e) {
             response.setError(SMSContants.UNEXPECTED_ERROR);

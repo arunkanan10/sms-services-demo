@@ -6,6 +6,8 @@ import com.atc.sms.dto.SMSResponse;
 import com.atc.sms.model.PhoneNumber;
 import com.atc.sms.repository.PhoneNumberRepository;
 import com.atc.sms.service.AuthenticationService;
+import com.atc.sms.util.JedisUtility;
+import com.atc.sms.util.SMSContants;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -99,7 +101,7 @@ public class InboundControllerTest {
         SMSResponse response = (SMSResponse) responseEntity.getBody();
         Assert.assertTrue(responseEntity.getStatusCode() == HttpStatus.OK);
         Assert.assertTrue(response.getError().equalsIgnoreCase(""));
-        Assert.assertTrue(response.getMessage().equalsIgnoreCase(SMSContants.ALL_PARAM_VALID));
+        Assert.assertTrue(response.getMessage().equalsIgnoreCase(SMSContants.INBOUND_SMS_OK));
     }
 
 }
